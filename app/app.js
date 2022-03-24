@@ -14,4 +14,7 @@ $(() => {
 
   // Game event listeners
   $('#new-game-button').on('click', gameEvents.onNewGame)
+
+  // Event listener for clicking square 0
+  $('#square-0').on('click', gameEvents.onSquareClick)
 })

@@ -10,6 +10,26 @@ const onNewGame = function (event) {
     .catch(gameUi.onNewGameFailure)
 }
 
+const onSquareClick = function (event) {
+  event.preventDefault()
+  const index = $(event.target).data('cell-index')
+
+  const updateObject = {
+    game: {
+      cell: {
+        index: index,
+        value: 'x'
+      },
+      over: false
+    }
+  }
+
+  gameApi.squareClick(updateObject)
+    .then(gameUi.onSquareClickSuccess)
+    .catch(gameUi.onSquareClickFailure)
+}
+
 module.exports = {
-  onNewGame
+  onNewGame,
+  onSquareClick
 }
