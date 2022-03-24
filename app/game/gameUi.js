@@ -37,6 +37,10 @@ const onClickedFilledCell = function () {
   $('#message').html('<p>That cell is filled, try again')
 }
 
+const updateBoard = function (index) {
+  $('#square-' + index).text('x')
+}
+
 module.exports = {
   onNewGameSuccess,
   onNewGameFailure,
@@ -44,5 +48,6 @@ module.exports = {
   onCheckGameFailure,
   onUpdateGameSuccess,
   onUpdateGameFailure,
-  onClickedFilledCell
+  onClickedFilledCell,
+  updateBoard
 }

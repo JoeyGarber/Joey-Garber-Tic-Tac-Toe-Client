@@ -39,6 +39,9 @@ const onSquareClick = function (event) {
   } else {
     gameUi.onClickedFilledCell()
   }
+
+  // This updates the gameboard
+  gameUi.updateBoard(index)
 }
 
 module.exports = {
