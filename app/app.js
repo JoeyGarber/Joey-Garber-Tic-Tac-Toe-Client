@@ -15,6 +15,14 @@ $(() => {
   // Game event listeners
   $('#new-game-button').on('click', gameEvents.onNewGame)
 
-  // Event listener for clicking square 0
+  // Event listener for clicking squares
   $('#square-0').on('click', gameEvents.onSquareClick)
+  $('#square-1').on('click', gameEvents.onSquareClick)
+  $('#square-2').on('click', gameEvents.onSquareClick)
+  $('#square-3').on('click', gameEvents.onSquareClick)
+  $('#square-4').on('click', gameEvents.onSquareClick)
+  $('#square-5').on('click', gameEvents.onSquareClick)
+  $('#square-6').on('click', gameEvents.onSquareClick)
+  $('#square-7').on('click', gameEvents.onSquareClick)
+  $('#square-8').on('click', gameEvents.onSquareClick)
 })
