@@ -21,7 +21,7 @@ const onSignInFailure = function () {
   )
 }
 
-const onSignOutSuccess = function (data) {
+const onSignOutSuccess = function () {
   $('#message').html('<p>You logged out successfully! Good stuff!</p>')
   $('form').trigger('reset')
   store.user = null

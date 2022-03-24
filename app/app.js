@@ -3,10 +3,15 @@
 
 // use require without a reference to ensure a file is bundled
 // require('./example')
-const events = require('./TicTacToe/events.js')
+const events = require('./auth/events.js')
+const gameEvents = require('./game/gameEvents.js')
 
 $(() => {
+  // Auth event listeners
   $('#sign-up-form').on('submit', events.onSignUp)
   $('#sign-in-form').on('submit', events.onSignIn)
   $('#sign-out-button').on('click', events.onSignOut)
+
+  // Game event listeners
+  $('#new-game-button').on('click', gameEvents.onNewGame)
 })
