@@ -1,4 +1,5 @@
 // const getFormFields = require('../../lib/get-form-fields.js')
+const store = require('../store.js')
 
 const gameApi = require('./gameApi')
 const gameUi = require('./gameUi')
@@ -14,19 +15,30 @@ const onSquareClick = function (event) {
   event.preventDefault()
   const index = $(event.target).data('cell-index')
 
-  const updateObject = {
-    game: {
-      cell: {
-        index: index,
-        value: 'x'
-      },
-      over: false
-    }
-  }
+  // This queries the server for the game being played, and puts the current cells array into store.game.cells
+  gameApi.checkGame()
+    .then(gameUi.onCheckGameSuccess)
+    .catch(gameUi.onCheckGameFailure)
 
-  gameApi.squareClick(updateObject)
-    .then(gameUi.onSquareClickSuccess)
-    .catch(gameUi.onSquareClickFailure)
+  if (store.game.cells[index] === '') {
+    // This is the data object that needs to be sent to the server to update the game
+    const updateObject = {
+      game: {
+        cell: {
+          index: index,
+          value: 'x'
+        },
+        over: false
+      }
+    }
+
+    // This sends the update object to the server
+    gameApi.updateGame(updateObject)
+      .then(gameUi.onUpdateGameSuccess)
+      .catch(gameUi.onUpdateGameFailure)
+  } else {
+    gameUi.onClickedFilledCell()
+  }
 }
 
 module.exports = {

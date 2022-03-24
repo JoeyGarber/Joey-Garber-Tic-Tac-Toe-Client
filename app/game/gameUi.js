@@ -13,21 +13,36 @@ const onNewGameFailure = function () {
     "<p>Whups, that new game didn't work. Are you signed in?</p>")
 }
 
-const onSquareClickSuccess = function (data) {
+const onCheckGameSuccess = function (data) {
+  store.game.cells = data.game.cells
+}
+
+const onCheckGameFailure = function () {
+  $('#message').html("<p>Couldn't check this game for some reason</p>")
+}
+
+const onUpdateGameSuccess = function (data) {
   $('#message').html(
     '<p>WORKED</p>'
   )
-  console.log(data.game)
+  store.game = data.game
 }
 
-const onSquareClickFailure = function (data) {
+const onUpdateGameFailure = function (data) {
   console.log("This should be what/'s wrong")
   console.log(data)
+}
+
+const onClickedFilledCell = function () {
+  $('#message').html('<p>That cell is filled, try again')
 }
 
 module.exports = {
   onNewGameSuccess,
   onNewGameFailure,
-  onSquareClickSuccess,
-  onSquareClickFailure
+  onCheckGameSuccess,
+  onCheckGameFailure,
+  onUpdateGameSuccess,
+  onUpdateGameFailure,
+  onClickedFilledCell
 }
