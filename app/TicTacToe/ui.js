@@ -1,27 +1,41 @@
 const store = require('../store.js')
 
 const onSignUpSuccess = function () {
-  console.log('Successfully created account!')
+  $('#message').html('<p>You created your account successfully! Nice work! Now log in!</p>')
+  $('form').trigger('reset')
 }
 
 const onSignUpFailure = function () {
-  console.log("Failed, probably because I keep reusing the same emails and can't do that")
+  $('#message').html("<p>Whups, sign-up didn't work. Check that you aren't already registered with that email</p>")
 }
 
 const onSignInSuccess = function (data) {
-  console.log('Successfully logged in!')
+  $('#message').html('<p>You logged in successfully! Good stuff!</p>')
+  $('form').trigger('reset')
   store.user = data.user
 }
 
 const onSignInFailure = function () {
   console.log(
-    'Failed to log in'
+    $('#message').html('<p>Oops, that didn\'t work</p>')
   )
+}
+
+const onSignOutSuccess = function (data) {
+  $('#message').html('<p>You logged out successfully! Good stuff!</p>')
+  $('form').trigger('reset')
+  store.user = null
+}
+
+const onSignOutFailure = function () {
+  console.log($('#message').html("<p>Oops, that didn't work</p>"))
 }
 
 module.exports = {
   onSignUpSuccess,
   onSignUpFailure,
   onSignInSuccess,
-  onSignInFailure
+  onSignInFailure,
+  onSignOutSuccess,
+  onSignOutFailure
 }

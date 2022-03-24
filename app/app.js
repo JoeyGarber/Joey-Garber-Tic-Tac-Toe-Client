@@ -8,4 +8,5 @@ const events = require('./TicTacToe/events.js')
 $(() => {
   $('#sign-up-form').on('submit', events.onSignUp)
   $('#sign-in-form').on('submit', events.onSignIn)
+  $('#sign-out-button').on('click', events.onSignOut)
 })
