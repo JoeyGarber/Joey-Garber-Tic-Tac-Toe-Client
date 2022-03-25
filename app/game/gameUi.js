@@ -31,7 +31,20 @@ const winCheck = function (cells, turn) {
 }
 
 const onNewGameSuccess = function (data) {
-  $('.box').css('display', 'flex')
+  const boardHtml = `<div id="game-board" class="container">
+      <div class="row">
+        <div id="square-0" data-cell-index="0" class="col-4 box">0</div>
+        <div id="square-1" data-cell-index="1" class="col-4 box">1</div>
+        <div id="square-2" data-cell-index="2" class="col-4 box">2</div>
+        <div id="square-3" data-cell-index="3" class="col-4 box">3</div>
+        <div id="square-4" data-cell-index="4" class="col-4 box">4</div>
+        <div id="square-5" data-cell-index="5" class="col-4 box">5</div>
+        <div id="square-6" data-cell-index="6" class="col-4 box">6</div>
+        <div id="square-7" data-cell-index="7" class="col-4 box">7</div>
+        <div id="square-8" data-cell-index="8" class="col-4 box">8</div>
+      </div>
+    </div>`
+  $('#game-board').html(boardHtml)
   store.game = data.game
   $('form').trigger('reset')
 }
@@ -54,12 +67,12 @@ const onUpdateGameSuccess = function (data) {
     '<p>WORKED</p>'
   )
   if (winCheck(data.game.cells, 'x') === true) {
-    $('.container').html('<h1>X: YOU WON!</h1>')
+    $('#game-board').html('<h1>X: YOU WON!</h1>')
   } else if (winCheck(data.game.cells, 'y') === true) {
     console.log('Y won!')
-    $('.container').html('<h1>Y: YOU WON!</h1>')
+    $('#game-board').html('<h1>Y: YOU WON!</h1>')
   } else if (data.game.cells.every(cell => cell === 'x' || cell === 'y')) {
-    $('.container').html('<h1>TIE!</h1>')
+    $('#game-board').html('<h1>TIE!</h1>')
   }
 }
 

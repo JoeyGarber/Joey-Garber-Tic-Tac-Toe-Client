@@ -74,7 +74,6 @@ const onSquareClick = function (event) {
     }
 
     // This sends the update object to the server
-    // It also updates store.game, so that cells in store.game.cells are current
     gameApi.updateGame(updateObject)
       .then(gameUi.onUpdateGameSuccess)
       .catch(gameUi.onUpdateGameFailure)
