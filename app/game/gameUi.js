@@ -1,7 +1,6 @@
-// const store = require('../store.js')
-const store = require('../store')
+const store = require('../store.js')
 
-const winCheck = function (cells, turn) {
+const winCheckForUi = function (array, turn) {
   const winningIndexes = [
     [0, 1, 2],
     [0, 4, 8],
@@ -11,21 +10,19 @@ const winCheck = function (cells, turn) {
     [2, 5, 8],
     [6, 7, 8]
   ]
-  // These are the indexes of all of a certain player's moves
-  const indexes = []
-  for (let i = 0; i < cells.length; i++) {
-    if (cells[i] === turn) {
-      indexes.push(i)
+  const index = []
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === turn) {
+      index.push(i)
     }
   }
 
-  // This loops through the winning indexes, and checks if the player index contains all of any of them
   for (let i = 0; i < winningIndexes.length; i++) {
-    const winningHand = winningIndexes[i].every((index) => {
-      return indexes.includes(index)
+    const winningScore = winningIndexes[i].every((play) => {
+      return index.includes(play)
     })
-    if (winningHand === true) {
-      return winningHand
+    if (winningScore === true) {
+      return winningScore
     }
   }
 }
@@ -54,6 +51,18 @@ const onNewGameFailure = function () {
     "<p>Whups, that new game didn't work. Are you signed in?</p>")
 }
 
+const onShowGamesSuccess = function (data) {
+  let gamesString = ''
+  for (let i = 0; i < data.games.length; i++) {
+    gamesString += '<p>Game: ' + data.games[i].cells + '</p><p>Game over: ' + data.games[i].over + '</p>'
+    $('#message').html(gamesString)
+  }
+}
+
+const onShowGamesFailure = function (data) {
+  $('#message').html('Something went wrong!')
+}
+
 const onCheckGameSuccess = function (data) {
   store.game.cells = data.game.cells
 }
@@ -66,13 +75,14 @@ const onUpdateGameSuccess = function (data) {
   $('#message').html(
     '<p>WORKED</p>'
   )
-  if (winCheck(data.game.cells, 'x') === true) {
-    $('#game-board').html('<h1>X: YOU WON!</h1>')
-  } else if (winCheck(data.game.cells, 'y') === true) {
-    console.log('Y won!')
-    $('#game-board').html('<h1>Y: YOU WON!</h1>')
-  } else if (data.game.cells.every(cell => cell === 'x' || cell === 'y')) {
-    $('#game-board').html('<h1>TIE!</h1>')
+  if (data.game.over) {
+    if (winCheckForUi(data.game.cells, 'x')) {
+      $('#game-board').html('<h1>X: YOU WON!</h1>')
+    } else if (winCheckForUi(data.game.cells, 'y')) {
+      $('#game-board').html('<h1>Y: YOU WON!</h1>')
+    } else {
+      $('#game-board').html('<h1>TIE!</h1>')
+    }
   }
 }
 
@@ -92,11 +102,13 @@ const onUpdateBoardRequest = function (index, turn) {
 module.exports = {
   onNewGameSuccess,
   onNewGameFailure,
+  onShowGamesSuccess,
+  onShowGamesFailure,
   onCheckGameSuccess,
   onCheckGameFailure,
   onUpdateGameSuccess,
   onUpdateGameFailure,
   onClickedFilledCell,
   onUpdateBoardRequest,
-  winCheck
+  winCheckForUi
 }

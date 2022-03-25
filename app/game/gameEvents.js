@@ -1,16 +1,16 @@
-// const getFormFields = require('../../lib/get-form-fields.js')
-const store = require('../store.js')
-
 const gameApi = require('./gameApi')
 const gameUi = require('./gameUi')
 
-store.turn = 'x'
+let turn = 'x'
+const localScore = []
+const localScoreX = []
+const localScoreY = []
 
-const alternateTurn = function (turn) {
+const alternateTurn = function () {
   if (turn === 'x') {
-    store.turn = 'y'
+    turn = 'y'
   } else {
-    store.turn = 'x'
+    turn = 'x'
   }
 }
 
@@ -21,7 +21,15 @@ const onNewGame = function (event) {
     .catch(gameUi.onNewGameFailure)
 }
 
-const winCheck = function (cells, turn) {
+const onShowGames = function (event) {
+  event.preventDefault()
+  gameApi.showGames()
+    .then(gameUi.onShowGamesSuccess)
+    .catch(gameUi.onShowGamesFailure)
+}
+
+// winCheck takes the local score array of indexes for a player and that player's X or O status, and returns true if they've won
+const winCheck = function (localScore, turn) {
   const winningIndexes = [
     [0, 1, 2],
     [0, 4, 8],
@@ -31,58 +39,64 @@ const winCheck = function (cells, turn) {
     [2, 5, 8],
     [6, 7, 8]
   ]
-  // These are the indexes of all of a certain player's moves
-  const indexes = []
-  for (let i = 0; i < cells.length; i++) {
-    if (cells[i] === turn) {
-      indexes.push(i)
-    }
-  }
-
-  // This loops through the winning indexes, and checks if the player index contains all of any of them
+  // This loops through the winning indexes and checks if all these plays are in the local scores kept
   for (let i = 0; i < winningIndexes.length; i++) {
-    const winningHand = winningIndexes[i].every(index => {
-      return indexes.includes(index)
+    const winningScore = winningIndexes[i].every((play) => {
+      return localScore.includes(play)
     })
-    if (winningHand === true) {
-      return winningHand
+    if (winningScore === true) {
+      return winningScore
     }
   }
 }
 
 const onSquareClick = function (event) {
   event.preventDefault()
-  // This is the index of the box that was clicked
+  // Index of the box that was clicked
   const index = $(event.target).data('cell-index')
 
-  // This queries the server for the game being played, and puts the current cells array into store.game.cells
-  gameApi.checkGame()
-    .then(gameUi.onCheckGameSuccess)
-    .catch(gameUi.onCheckGameFailure)
+  // Checks if the space is open to be played on
+  if (!localScore.includes(index)) {
+    // Updates the local scores on a valid move
+    localScore.push(index)
+    if (turn === 'x') {
+      localScoreX.push(index)
+    } else {
+      localScoreY.push(index)
+    }
 
-  // I don't love putting all of this here and relying on the store, becasue if you click a filled cell really fast after it's filled you might be able to do it before gameApi.checkGame() has responded and set store.game.cells. But I tried refactoring everything and it got messy and didn't work well. So oh well.
-  if (store.game.cells[index] === '') {
-    // This is the data object that needs to be sent to the server to update the game
+    // Checks if the game is over
+    const gameOver = winCheck(localScoreX, 'x') || winCheck(localScoreY, 'y') || localScore.length === 9
+
+    // Data object that needs to be sent to the server to update the game
     const updateObject = {
       game: {
         cell: {
           index: index,
-          value: store.turn
+          value: turn
         },
-        over: false
+        over: gameOver
       }
     }
 
-    // This sends the update object to the server
+    // Sends the update object to the server
     gameApi.updateGame(updateObject)
       .then(gameUi.onUpdateGameSuccess)
       .catch(gameUi.onUpdateGameFailure)
 
-    // This updates the game board
-    gameUi.onUpdateBoardRequest(index, store.turn)
+    // Updates the game board
+    gameUi.onUpdateBoardRequest(index, turn)
 
-    // This switches whose turn it is
-    alternateTurn(store.turn)
+    // Switches whose turn it is
+    alternateTurn()
+
+    // Resets things when someone wins or they tie
+    if (gameOver === true) {
+      localScoreX.length = 0
+      localScoreY.length = 0
+      localScore.length = 0
+      turn = 'x'
+    }
   } else {
     gameUi.onClickedFilledCell()
   }
@@ -90,6 +104,7 @@ const onSquareClick = function (event) {
 
 module.exports = {
   onNewGame,
+  onShowGames,
   onSquareClick,
   alternateTurn,
   winCheck

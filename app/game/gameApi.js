@@ -12,6 +12,17 @@ const newGame = function () {
   })
 }
 
+const showGames = function () {
+  return $.ajax({
+    url: 'https://tic-tac-toe-api-development.herokuapp.com' + '/games/',
+    method: 'GET',
+    headers: {
+      contentType: 'application/json',
+      Authorization: 'Bearer ' + store.user.token
+    }
+  })
+}
+
 const checkGame = function () {
   return $.ajax({
     url: 'https://tic-tac-toe-api-development.herokuapp.com' + '/games/' + store.game._id,
@@ -38,5 +49,6 @@ const updateGame = function (data) {
 module.exports = {
   newGame,
   checkGame,
+  showGames,
   updateGame
 }
