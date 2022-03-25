@@ -5,6 +5,7 @@ const gameApi = require('./gameApi')
 const gameUi = require('./gameUi')
 
 store.turn = 'x'
+
 const alternateTurn = function (turn) {
   if (turn === 'x') {
     store.turn = 'y'
@@ -25,8 +26,6 @@ const onSquareClick = function (event) {
   // This is the index of the box that was clicked
   const index = $(event.target).data('cell-index')
 
-  // This keeps track of whose turn it is
-
   // This queries the server for the game being played, and puts the current cells array into store.game.cells
   gameApi.checkGame()
     .then(gameUi.onCheckGameSuccess)
@@ -45,22 +44,19 @@ const onSquareClick = function (event) {
     }
 
     // This sends the update object to the server
+    // It also updates store.game, so that cells in store.game.cells are current
     gameApi.updateGame(updateObject)
       .then(gameUi.onUpdateGameSuccess)
       .catch(gameUi.onUpdateGameFailure)
+
+    // This updates the game board
+    gameUi.onUpdateBoardRequest(index, store.turn)
+
+    // This switches whose turn it is
+    alternateTurn(store.turn)
   } else {
     gameUi.onClickedFilledCell()
   }
-
-  // This updates the game board
-  gameUi.updateBoard(index, store.turn)
-
-  // Down here write something that runs checkGame again, then compares it to all possible winning hands. Which I can define in a global const at the top.
-  // If it matches, execute a function that tells them they won!
-  // Also figure out how to switch between x and y tmm.
-
-  // This switches whose turn it is
-  alternateTurn(store.turn)
 }
 
 module.exports = {
