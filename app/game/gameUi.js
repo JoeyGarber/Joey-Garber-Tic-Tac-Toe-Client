@@ -37,8 +37,8 @@ const onClickedFilledCell = function () {
   $('#message').html('<p>That cell is filled, try again')
 }
 
-const updateBoard = function (index) {
-  $('#square-' + index).text('x')
+const updateBoard = function (index, turn) {
+  $('#square-' + index).text(turn)
 }
 
 module.exports = {
