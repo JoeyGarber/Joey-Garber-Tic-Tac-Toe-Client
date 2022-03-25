@@ -1,5 +1,4 @@
 // const store = require('../store.js')
-
 const store = require('../store')
 
 const winCheck = function (cells, turn) {
@@ -55,9 +54,12 @@ const onUpdateGameSuccess = function (data) {
     '<p>WORKED</p>'
   )
   if (winCheck(data.game.cells, 'x') === true) {
-    console.log('X won!')
-  } else if (winCheck(store.game.cells, 'y') === true) {
+    $('.container').html('<h1>X: YOU WON!</h1>')
+  } else if (winCheck(data.game.cells, 'y') === true) {
     console.log('Y won!')
+    $('.container').html('<h1>Y: YOU WON!</h1>')
+  } else if (data.game.cells.every(cell => cell === 'x' || cell === 'y')) {
+    $('.container').html('<h1>TIE!</h1>')
   }
 }
 

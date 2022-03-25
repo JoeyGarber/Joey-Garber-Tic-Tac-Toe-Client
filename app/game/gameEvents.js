@@ -21,6 +21,35 @@ const onNewGame = function (event) {
     .catch(gameUi.onNewGameFailure)
 }
 
+const winCheck = function (cells, turn) {
+  const winningIndexes = [
+    [0, 1, 2],
+    [0, 4, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 4, 6],
+    [2, 5, 8],
+    [6, 7, 8]
+  ]
+  // These are the indexes of all of a certain player's moves
+  const indexes = []
+  for (let i = 0; i < cells.length; i++) {
+    if (cells[i] === turn) {
+      indexes.push(i)
+    }
+  }
+
+  // This loops through the winning indexes, and checks if the player index contains all of any of them
+  for (let i = 0; i < winningIndexes.length; i++) {
+    const winningHand = winningIndexes[i].every(index => {
+      return indexes.includes(index)
+    })
+    if (winningHand === true) {
+      return winningHand
+    }
+  }
+}
+
 const onSquareClick = function (event) {
   event.preventDefault()
   // This is the index of the box that was clicked
@@ -31,6 +60,7 @@ const onSquareClick = function (event) {
     .then(gameUi.onCheckGameSuccess)
     .catch(gameUi.onCheckGameFailure)
 
+  // I don't love putting all of this here and relying on the store, becasue if you click a filled cell really fast after it's filled you might be able to do it before gameApi.checkGame() has responded and set store.game.cells. But I tried refactoring everything and it got messy and didn't work well. So oh well.
   if (store.game.cells[index] === '') {
     // This is the data object that needs to be sent to the server to update the game
     const updateObject = {
@@ -62,5 +92,6 @@ const onSquareClick = function (event) {
 module.exports = {
   onNewGame,
   onSquareClick,
-  alternateTurn
+  alternateTurn,
+  winCheck
 }
