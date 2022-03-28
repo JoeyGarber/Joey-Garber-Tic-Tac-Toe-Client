@@ -1,5 +1,6 @@
-const gameApi = require('./gameApi')
-const gameUi = require('./gameUi')
+const gameApi = require('./gameApi.js')
+const gameUi = require('./gameUi.js')
+const helpers = require('./helpers.js')
 
 let turn = 'x'
 const localScore = []
@@ -28,28 +29,6 @@ const onShowGames = function (event) {
     .catch(gameUi.onShowGamesFailure)
 }
 
-// winCheck takes the local score array of indexes for a player and that player's X or O status, and returns true if they've won
-const winCheck = function (localScore, turn) {
-  const winningIndexes = [
-    [0, 1, 2],
-    [0, 4, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 4, 6],
-    [2, 5, 8],
-    [6, 7, 8]
-  ]
-  // This loops through the winning indexes and checks if all these plays are in the local scores kept
-  for (let i = 0; i < winningIndexes.length; i++) {
-    const winningScore = winningIndexes[i].every((play) => {
-      return localScore.includes(play)
-    })
-    if (winningScore === true) {
-      return winningScore
-    }
-  }
-}
-
 const onSquareClick = function (event) {
   event.preventDefault()
   // Index of the box that was clicked
@@ -66,7 +45,7 @@ const onSquareClick = function (event) {
     }
 
     // Checks if the game is over
-    const gameOver = winCheck(localScoreX, 'x') || winCheck(localScoreY, 'y') || localScore.length === 9
+    const gameOver = helpers.winCheck(localScoreX, 'x') || helpers.winCheck(localScoreY, 'y') || localScore.length === 9
 
     // Data object that needs to be sent to the server to update the game
     const updateObject = {
@@ -98,7 +77,7 @@ const onSquareClick = function (event) {
       turn = 'x'
     }
   } else {
-    gameUi.onClickedFilledCell()
+    helpers.onClickedFilledCell()
   }
 }
 
@@ -106,6 +85,5 @@ module.exports = {
   onNewGame,
   onShowGames,
   onSquareClick,
-  alternateTurn,
-  winCheck
+  alternateTurn
 }

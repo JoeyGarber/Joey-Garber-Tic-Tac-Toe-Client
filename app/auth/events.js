@@ -2,6 +2,8 @@ const getFormFields = require('../../lib/get-form-fields.js')
 
 const api = require('./api.js')
 const ui = require('./ui.js')
+const gameApi = require('../game/gameApi.js')
+const gameUi = require('../game/gameUi.js')
 
 const onSignUp = function (event) {
   event.preventDefault()
@@ -14,6 +16,9 @@ const onSignIn = function (event) {
   event.preventDefault()
   api.signIn(getFormFields(event.target))
     .then(ui.onSignInSuccess)
+    .then(gameApi.newGame)
+    .then(gameUi.onNewGameSuccess)
+    .catch(gameUi.onNewGameFailure)
     .catch(ui.onSignInFailure)
 }
 

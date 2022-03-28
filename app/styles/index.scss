@@ -2,12 +2,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
 
 $font-family: 'Playfair Display', serif;
-$body-bg-color: grey;
-$box-bg-color: lightgrey;
+$body-bg-color: rgba(255, 255, 185, 1);
+$box-bg-color: rgba(11, 72, 14, 1);
 $box-border-color: white;
 
 body {
   background-color: $body-bg-color;
+}
+
+.topnav {
+  display: none;
 }
 
 .box {

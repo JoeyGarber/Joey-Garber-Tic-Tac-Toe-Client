@@ -1,33 +1,9 @@
 const store = require('../store.js')
-
-const winCheckForUi = function (array, turn) {
-  const winningIndexes = [
-    [0, 1, 2],
-    [0, 4, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 4, 6],
-    [2, 5, 8],
-    [6, 7, 8]
-  ]
-  const index = []
-  for (let i = 0; i < array.length; i++) {
-    if (array[i] === turn) {
-      index.push(i)
-    }
-  }
-
-  for (let i = 0; i < winningIndexes.length; i++) {
-    const winningScore = winningIndexes[i].every((play) => {
-      return index.includes(play)
-    })
-    if (winningScore === true) {
-      return winningScore
-    }
-  }
-}
+const helpers = require('./helpers.js')
 
 const onNewGameSuccess = function (data) {
+  store.game = data.game
+  $('form').trigger('reset')
   const boardHtml = `<div id="game-board" class="container">
       <div class="row">
         <div id="square-0" data-cell-index="0" class="col-4 box">0</div>
@@ -42,8 +18,6 @@ const onNewGameSuccess = function (data) {
       </div>
     </div>`
   $('#game-board').html(boardHtml)
-  store.game = data.game
-  $('form').trigger('reset')
 }
 
 const onNewGameFailure = function () {
@@ -63,22 +37,14 @@ const onShowGamesFailure = function (data) {
   $('#message').html('Something went wrong!')
 }
 
-const onCheckGameSuccess = function (data) {
-  store.game.cells = data.game.cells
-}
-
-const onCheckGameFailure = function () {
-  $('#message').html("<p>Couldn't check this game for some reason</p>")
-}
-
 const onUpdateGameSuccess = function (data) {
   $('#message').html(
     '<p>WORKED</p>'
   )
   if (data.game.over) {
-    if (winCheckForUi(data.game.cells, 'x')) {
+    if (helpers.winCheckForUi(data.game.cells, 'x')) {
       $('#game-board').html('<h1>X: YOU WON!</h1>')
-    } else if (winCheckForUi(data.game.cells, 'y')) {
+    } else if (helpers.winCheckForUi(data.game.cells, 'y')) {
       $('#game-board').html('<h1>Y: YOU WON!</h1>')
     } else {
       $('#game-board').html('<h1>TIE!</h1>')
@@ -91,12 +57,16 @@ const onUpdateGameFailure = function (data) {
   console.log(data)
 }
 
-const onClickedFilledCell = function () {
-  $('#message').html('<p>That cell is filled, try again')
-}
-
 const onUpdateBoardRequest = function (index, turn) {
   $('#square-' + index).text(turn)
+}
+
+const onSquareClickSuccess = function () {
+  console.log('Nice, click worked')
+}
+
+const onSquareClickFailure = function () {
+  console.log('Aw :( click failed')
 }
 
 module.exports = {
@@ -104,11 +74,9 @@ module.exports = {
   onNewGameFailure,
   onShowGamesSuccess,
   onShowGamesFailure,
-  onCheckGameSuccess,
-  onCheckGameFailure,
   onUpdateGameSuccess,
   onUpdateGameFailure,
-  onClickedFilledCell,
   onUpdateBoardRequest,
-  winCheckForUi
+  onSquareClickSuccess,
+  onSquareClickFailure
 }
