@@ -1,7 +1,7 @@
 @import '~bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
 
-$font-family: 'Playfair Display', serif;
+$font-family: 'Helvetica', 'Arial', 'Sans-Serif';
 $body-bg-color: rgba(255, 255, 185, 1);
 $box-bg-color: rgba(11, 72, 14, 0);
 $box-border-color: rgba(11, 72, 14, 0);
@@ -15,7 +15,7 @@ body {
   display: none;
 }
 
-.box {
+.square {
   align-items: center;
   background-color: $box-bg-color;
   border: 1px solid $box-border-color;
@@ -26,7 +26,7 @@ body {
   justify-content: center;
 }
 
-h1, h3, #message {
+h1, h4, h5, #message {
   display: flex;
   justify-content: center;
 }
@@ -34,11 +34,6 @@ h1, h3, #message {
 form {
   display: flex;
   flex-direction: column;
-}
-
-#play-again-button {
-  display: flex;
-  justify-content: center;
 }
 
 #square-0 {
