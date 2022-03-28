@@ -11,6 +11,7 @@ const onSignUpFailure = function () {
 
 const onSignInSuccess = function (data) {
   $('#message').html('<p>You logged in successfully! Good stuff!</p>')
+  $('#message').hide(3000)
   $('form').trigger('reset')
   $('.topnav').css('display', 'flex')
   $('form').css('display', 'none')
@@ -23,6 +24,7 @@ const onSignInFailure = function () {
 
 const onSignOutSuccess = function () {
   $('#message').html('<p>You logged out successfully! Good stuff!</p>')
+  $('#message').hide(3000)
   $('form').trigger('reset')
   $('.topnav').css('display', 'none')
   $('form').css('display', 'block')
