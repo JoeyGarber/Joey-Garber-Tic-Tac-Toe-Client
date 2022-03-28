@@ -26,7 +26,7 @@ body {
   justify-content: center;
 }
 
-h1, h3 {
+h1, h3, #message {
   display: flex;
   justify-content: center;
 }
@@ -34,7 +34,11 @@ h1, h3 {
 form {
   display: flex;
   flex-direction: column;
-  flex-shrink: 3;
+}
+
+#play-again-button {
+  display: flex;
+  justify-content: center;
 }
 
 #square-0 {
