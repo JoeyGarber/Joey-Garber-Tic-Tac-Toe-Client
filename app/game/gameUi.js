@@ -29,7 +29,7 @@ const onShowGamesSuccess = function (data) {
   let gamesString = ''
   for (let i = 0; i < data.games.length; i++) {
     gamesString += '<p>Game: ' + data.games[i].cells + '</p><p>Game over: ' + data.games[i].over + '</p>'
-    $('#message').html(gamesString)
+    $('#modal-message').html(gamesString)
   }
 }
 
