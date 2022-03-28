@@ -1,8 +1,9 @@
 const store = require('../store.js')
+const apiUrl = require('../config.js')
 
 const newGame = function () {
   return $.ajax({
-    url: 'https://tic-tac-toe-api-development.herokuapp.com' + '/games',
+    url: apiUrl.apiUrl + '/games',
     method: 'POST',
     headers: {
       contentType: 'application/json',
@@ -14,7 +15,7 @@ const newGame = function () {
 
 const showGames = function () {
   return $.ajax({
-    url: 'https://tic-tac-toe-api-development.herokuapp.com' + '/games/',
+    url: apiUrl.apiUrl + '/games/',
     method: 'GET',
     headers: {
       contentType: 'application/json',
@@ -25,7 +26,7 @@ const showGames = function () {
 
 const updateGame = function (data) {
   return $.ajax({
-    url: 'https://tic-tac-toe-api-development.herokuapp.com' + '/games/' + store.game._id,
+    url: apiUrl.apiUrl + '/games/' + store.game._id,
     method: 'PATCH',
     headers: {
       contentType: 'application/json',

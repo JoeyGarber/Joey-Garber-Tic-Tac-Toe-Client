@@ -22,7 +22,7 @@ const onNewGameSuccess = function (data) {
 
 const onNewGameFailure = function () {
   $('#message').html(
-    "<p>Whups, that new game didn't work. Are you signed in?</p>")
+    "<p>Whups, that didn't work</p>")
 }
 
 const onShowGamesSuccess = function (data) {
@@ -38,21 +38,19 @@ const onShowGamesFailure = function (data) {
 }
 
 const onUpdateGameSuccess = function (data) {
-  $('#message').html(
-    '<p>WORKED</p>'
-  )
+  console.log('Game updated successfully')
   if (data.game.over) {
     if (helpers.winCheckForUi(data.game.cells, 'x')) {
       $('#game-board').html(
-        '<h1>X: YOU WON!</h1> <button id="play-again-button">Play Again?</button>'
+        '<h1>X: YOU WON!</h1> <button type="button" class="btn btn-success" id="play-again-button">Play Again?</button>'
       )
     } else if (helpers.winCheckForUi(data.game.cells, 'y')) {
       $('#game-board').html(
-        '<h1>Y: YOU WON!</h1><button id="play-again-button">Play Again?</button>'
+        '<h1>Y: YOU WON!</h1><button type="button" class="btn btn-success" id="play-again-button">Play Again?</button>'
       )
     } else {
       $('#game-board').html(
-        '<h1>TIE!</h1><button id="play-again-button">Play Again?</button>'
+        '<h1>TIE!</h1><button type="button" class="btn btn-success" id="play-again-button">Play Again?</button>'
       )
     }
   }

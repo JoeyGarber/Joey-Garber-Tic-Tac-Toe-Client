@@ -1,8 +1,9 @@
 const store = require('../store.js')
+const apiUrl = require('../config')
 
 const signUp = function (data) {
   return $.ajax({
-    url: 'https://tic-tac-toe-api-development.herokuapp.com' + '/sign-up',
+    url: apiUrl.apiUrl + '/sign-up',
     method: 'POST',
     headers: {
       contentType: 'application/json'
@@ -13,7 +14,7 @@ const signUp = function (data) {
 
 const signIn = function (data) {
   return $.ajax({
-    url: 'https://tic-tac-toe-api-development.herokuapp.com' + '/sign-in',
+    url: apiUrl.apiUrl + '/sign-in',
     method: 'POST',
     headers: {
       contentType: 'application/json'
@@ -24,7 +25,7 @@ const signIn = function (data) {
 
 const signOut = function () {
   return $.ajax({
-    url: 'https://tic-tac-toe-api-development.herokuapp.com' + '/sign-out',
+    url: apiUrl.apiUrl + '/sign-out',
     method: 'DELETE',
     headers: {
       contentType: 'application/json',

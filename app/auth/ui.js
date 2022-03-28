@@ -25,7 +25,7 @@ const onSignOutSuccess = function () {
   $('#message').html('<p>You logged out successfully! Good stuff!</p>')
   $('form').trigger('reset')
   $('.topnav').css('display', 'none')
-  $('form').css('display', 'flex')
+  $('form').css('display', 'block')
   $('#game-board').html('<div id="game-board"></div>')
   store.user = null
 }
