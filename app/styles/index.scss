@@ -3,8 +3,9 @@
 
 $font-family: 'Playfair Display', serif;
 $body-bg-color: rgba(255, 255, 185, 1);
-$box-bg-color: rgba(11, 72, 14, 1);
-$box-border-color: white;
+$box-bg-color: rgba(11, 72, 14, 0);
+$box-border-color: rgba(11, 72, 14, 0);
+$game-board-border: 1.5px solid rgba(11, 72, 14, 1);
 
 body {
   background-color: $body-bg-color;
@@ -18,12 +19,64 @@ body {
   align-items: center;
   background-color: $box-bg-color;
   border: 1px solid $box-border-color;
-  color: $box-border-color;
+  color: rgba(11, 72, 14, 1);
   display: flex;
   font-family: $font-family;
   height: 80px;
   justify-content: center;
 }
+
+#square-0 {
+  border-bottom: $game-board-border;
+  border-right: $game-board-border;
+}
+
+#square-1 {
+  border-bottom: $game-board-border;
+  border-left: $game-board-border;
+  border-right: $game-board-border;
+}
+
+#square-2 {
+  border-bottom: $game-board-border;
+  border-left: $game-board-border;
+}
+
+#square-3 {
+  border-top: $game-board-border;
+  border-bottom: $game-board-border;
+  border-right: $game-board-border;
+}
+
+#square-4 {
+  border-top: $game-board-border;
+  border-bottom: $game-board-border;
+  border-right: $game-board-border;
+  border-left: $game-board-border;
+}
+
+#square-5 {
+  border-top: $game-board-border;
+  border-bottom: $game-board-border;
+  border-left: $game-board-border;
+}
+
+#square-6 {
+  border-top: $game-board-border;
+  border-right: $game-board-border;
+}
+
+#square-7 {
+  border-top: $game-board-border;
+  border-left: $game-board-border;
+  border-right: $game-board-border;
+}
+
+#square-8 {
+  border-top: $game-board-border;
+  border-left: $game-board-border;
+}
+
 
 h1, h2 {
   font-family: $font-family;
