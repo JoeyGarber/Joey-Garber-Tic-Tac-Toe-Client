@@ -26,6 +26,17 @@ body {
   justify-content: center;
 }
 
+h1, h3 {
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 3;
+}
+
 #square-0 {
   border-bottom: $game-board-border;
   border-right: $game-board-border;
