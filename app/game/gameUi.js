@@ -28,7 +28,7 @@ const onNewGameFailure = function () {
 const onShowGamesSuccess = function (data) {
   let gamesString = ''
   for (let i = 0; i < data.games.length; i++) {
-    gamesString += '<p>Game: <ul style="list-style-type: none;"><li>' + helpers.selectThreeIndices(0, 1, 2, data.games[i].cells) + '</li><li>' + helpers.selectThreeIndices(3, 4, 5, data.games[i].cells) + '</li><li>' + helpers.selectThreeIndices(6, 7, 8, data.games[i].cells) + '</li></ul></p><p>Game over: ' + data.games[i].over + '</p>'
+    gamesString += '<p>Game ' + (i + 1) + ':<ul style="list-style-type: none;"><li>' + helpers.selectThreeIndices(0, 1, 2, data.games[i].cells) + '</li><li>' + helpers.selectThreeIndices(3, 4, 5, data.games[i].cells) + '</li><li>' + helpers.selectThreeIndices(6, 7, 8, data.games[i].cells) + '</li></ul></p><p>Game over: ' + data.games[i].over + '</p>'
     $('#modal-message').html(gamesString)
   }
 }
