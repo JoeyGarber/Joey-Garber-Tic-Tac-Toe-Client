@@ -21,6 +21,7 @@ const onNewGameSuccess = function (data) {
 }
 
 const onNewGameFailure = function () {
+  $('#message').show()
   $('#message').html(
     '<p>Whups, that didn\'t work</p>')
 }
@@ -34,11 +35,11 @@ const onShowGamesSuccess = function (data) {
 }
 
 const onShowGamesFailure = function (data) {
+  $('#message').show()
   $('#message').html('Something went wrong!')
 }
 
 const onUpdateGameSuccess = function (data) {
-  console.log('Game updated successfully')
   if (data.game.over) {
     if (helpers.winCheckForUi(data.game.cells, 'x')) {
       $('#game-board').html(
@@ -57,8 +58,8 @@ const onUpdateGameSuccess = function (data) {
 }
 
 const onUpdateGameFailure = function (data) {
-  console.log("This should be what/'s wrong")
-  console.log(data)
+  $('#message').show()
+  $('#message').html('Updating the game went wrong!')
 }
 
 const onUpdateBoardRequest = function (index, turn) {

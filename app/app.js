@@ -5,12 +5,15 @@
 // require('./example')
 const events = require('./auth/events.js')
 const gameEvents = require('./game/gameEvents.js')
+const ui = require('./auth/ui.js')
 
 $(() => {
   // Auth event listeners
   $('#sign-up-form').on('submit', events.onSignUp)
   $('#sign-in-form').on('submit', events.onSignIn)
   $('#sign-out-button').on('click', events.onSignOut)
+  $('#show-change-password-form-button').on('click', ui.onShowChangePasswordFormButton)
+  $('#game-board').on('submit', '#change-password', events.onChangePassword)
 
   // Game event listeners
   $('#new-game-button').on('click', gameEvents.onNewGame)
