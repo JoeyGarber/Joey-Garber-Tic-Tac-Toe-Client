@@ -1,5 +1,7 @@
 const onClickedFilledCell = function () {
+  $('#message').show()
   $('#message').html('<p>That cell is filled, try again')
+  $('#message').hide(3000)
 }
 
 // winCheck takes the local score array of indexes for a player and that player's X or O status, and returns true if they've won

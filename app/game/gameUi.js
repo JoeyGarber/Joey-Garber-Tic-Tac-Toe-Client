@@ -18,6 +18,9 @@ const onNewGameSuccess = function (data) {
       </div>
     </div>`
   $('#game-board').html(boardHtml)
+  $('#message').show()
+  $('#message').html('<p>New Game</p>')
+  $('#message').hide(3000)
 }
 
 const onNewGameFailure = function () {
