@@ -14,8 +14,8 @@ https://joeygarber.github.io/Joey-Garber-Tic-Tac-Toe-Client/
 
 ### Screenshots
 
-![Log-in Screen](https://imgur.com/Hn1u2LC)
-![Game-board](https://imgur.com/sGG5bHo)
+![Log-in Screen](https://i.imgur.com/Hn1u2LC.png)
+![Game-board](https://i.imgur.com/sGG5bHo.png)
 
 ### Planning Story
 
@@ -23,7 +23,7 @@ I planned to start by completing all of the authentication aspects of the app fi
 
 ### Wireframe
 
-![Original Wireframe](https://imgur.com/11uxX08)
+![Original Wireframe](https://i.imgur.com/11uxX08.jpg)
 
 ### User Stories
 
