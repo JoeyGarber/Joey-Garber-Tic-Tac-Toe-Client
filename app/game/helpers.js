@@ -51,8 +51,13 @@ const winCheckForUi = function (array, turn) {
   }
 }
 
+const selectThreeIndices = function (indice0, indice1, indice2, array) {
+  return [indice0, indice1, indice2].map(play => array[play])
+}
+
 module.exports = {
   winCheck,
   winCheckForUi,
-  onClickedFilledCell
+  onClickedFilledCell,
+  selectThreeIndices
 }

@@ -2,11 +2,12 @@ const store = require('../store.js')
 
 const onSignUpSuccess = function () {
   $('#message').html('<p>You created your account successfully! Nice work! Now log in!</p>')
+  $('#message').hide(3000)
   $('form').trigger('reset')
 }
 
 const onSignUpFailure = function () {
-  $('#message').html("<p>Whups, sign-up didn't work. Check that you aren't already registered with that email</p>")
+  $('#message').html('<p>Whups, sign-up didn\'t work.</p>')
 }
 
 const onSignInSuccess = function (data) {
