@@ -31,6 +31,14 @@ h1, h4, h5, #message {
   justify-content: center;
 }
 
+#forms {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+}
+
 form {
   display: flex;
   flex-direction: column;
