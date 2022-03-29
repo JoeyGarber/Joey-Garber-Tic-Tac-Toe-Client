@@ -103,3 +103,13 @@ h1, h2 {
 .alt-color {
   background-color: cyan;
 }
+
+.container {
+  width: 300px;
+}
+
+@media (max-width: 300px) {
+  .container {
+    width: 90%;
+  }
+}
