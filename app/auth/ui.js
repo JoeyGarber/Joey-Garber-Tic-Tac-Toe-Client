@@ -1,7 +1,7 @@
 const store = require('../store.js')
 
 const onSignUpSuccess = function () {
-  $('message').show()
+  $('#message').show()
   $('#message').html('<p>You created your account successfully! Nice work! Now log in!</p>')
   $('#message').hide(3000)
   $('form').trigger('reset')
