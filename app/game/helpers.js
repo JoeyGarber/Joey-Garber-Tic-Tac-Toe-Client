@@ -13,6 +13,7 @@ const winCheck = function (localScore, turn) {
     [1, 4, 7],
     [2, 4, 6],
     [2, 5, 8],
+    [3, 4, 5],
     [6, 7, 8]
   ]
   // This loops through the winning indexes and checks if all these plays are in the local scores kept
@@ -34,6 +35,7 @@ const winCheckForUi = function (array, turn) {
     [1, 4, 7],
     [2, 4, 6],
     [2, 5, 8],
+    [3, 4, 5],
     [6, 7, 8]
   ]
   const index = []
