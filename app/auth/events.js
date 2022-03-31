@@ -7,8 +7,15 @@ const gameUi = require('../game/gameUi.js')
 
 const onSignUp = function (event) {
   event.preventDefault()
-  api.signUp(getFormFields(event.target))
+  const data = getFormFields(event.target)
+  delete data.credentials.password_confirmation
+  api
+    .signUp(getFormFields(event.target))
     .then(ui.onSignUpSuccess)
+    .then(() => api.signIn(data))
+    .then(ui.onSignInSuccess)
+    .then(gameApi.newGame)
+    .then(gameUi.onNewGameSuccess)
     .catch(ui.onSignUpFailure)
 }
 
