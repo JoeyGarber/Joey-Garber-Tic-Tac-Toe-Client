@@ -1,9 +1,6 @@
 const store = require('../store.js')
 
 const onSignUpSuccess = function () {
-  $('#message').show()
-  $('#message').html('<p>You created your account successfully! Nice work! Now log in!</p>')
-  $('#message').hide(3000)
   $('form').trigger('reset')
 }
 
@@ -13,9 +10,6 @@ const onSignUpFailure = function () {
 }
 
 const onSignInSuccess = function (data) {
-  $('#message').show()
-  $('#message').html('<p>You logged in successfully! Good stuff!</p>')
-  $('#message').hide(3000)
   $('form').trigger('reset')
   $('.topnav').css('display', 'flex')
   $('form').css('display', 'none')

@@ -4,6 +4,7 @@ const api = require('./api.js')
 const ui = require('./ui.js')
 const gameApi = require('../game/gameApi.js')
 const gameUi = require('../game/gameUi.js')
+const gameEvents = require('../game/gameEvents.js')
 
 const onSignUp = function (event) {
   event.preventDefault()
@@ -21,11 +22,10 @@ const onSignUp = function (event) {
 
 const onSignIn = function (event) {
   event.preventDefault()
-  api.signIn(getFormFields(event.target))
+  api
+    .signIn(getFormFields(event.target))
     .then(ui.onSignInSuccess)
-    .then(gameApi.newGame)
-    .then(gameUi.onNewGameSuccess)
-    .catch(gameUi.onNewGameFailure)
+    .then(() => gameEvents.onNewGame(event))
     .catch(ui.onSignInFailure)
 }
 
