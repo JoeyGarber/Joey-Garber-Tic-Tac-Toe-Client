@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Tic Tac Toe</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Do not add `script` tags-->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    </head>
+    <body>
+      <div class="topnav">
+        <button id="new-game-button" type="button" class="btn btn-success">New Game</button>
+        <button id="sign-out-button" type="button" class="btn btn-success">Sign Out</button>
+        <button id="show-games-button" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          Show Game History
+        </button>
+        <button id="show-change-password-form-button" type="button" class="btn btn-success">Change Password</button>
+      </div>
+
+      <h1>Tic-Tac-Toe</h1>
+      <h5>By Joey Garber</h5>
+      <div id="forms">
+        <form id="sign-in-form">
+          <h4>Sign In</h4>
+          <input name="credentials[email]" type="email" placeholder="Email">
+          <input name="credentials[password]" type="password" placeholder="Password">
+          <button type="submit">Sign In</button>
+        </form>
+        <hr>
+        <form id="sign-up-form">
+          <h4>Sign Up</h4>
+          <input name="credentials[email]" type="email" placeholder="Email">
+          <input name="credentials[password]" type="password" placeholder="Password">
+          <input name="credentials[password_confirmation]" type="password" placeholder="Confirm Password">
+          <button type="submit">Sign Up</button>
+        </form>
+      </div>
+      <div id="game-board"></div>
+      <p id="message"></p>
+      <!-- Modal -->
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Game History</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div id="modal-message"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+</html>
